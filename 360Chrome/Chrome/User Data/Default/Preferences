@@ -1,0 +1,704 @@
+{
+   "account_id_migration_state": 2,
+   "account_tracker_service_last_update": "13185901284879467",
+   "adblock": {
+      "cloud_tips_mode": 0
+   },
+   "bookmark_bar": {
+      "show_on_all_tabs": true
+   },
+   "browser": {
+      "check_default_browser_satrt": true,
+      "clear_lso_data_enabled": true,
+      "has_seen_welcome_page": false,
+      "pepper_flash_settings_enabled": true,
+      "should_reset_check_default_browser": false,
+      "window_placement": {
+         "bottom": 833,
+         "left": 17,
+         "maximized": false,
+         "right": 1178,
+         "top": 296,
+         "work_area_bottom": 1040,
+         "work_area_left": 0,
+         "work_area_right": 1920,
+         "work_area_top": 0
+      }
+   },
+   "countryid_at_install": 17230,
+   "data_reduction": {
+      "daily_original_length": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "37077658", "5479653", "0", "6664916", "0", "8800659" ],
+      "daily_original_length_application": "1283850",
+      "daily_original_length_unknown": "207969",
+      "daily_original_length_via_data_reduction_proxy": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+      "daily_original_length_via_data_reduction_proxy_application": "0",
+      "daily_original_length_via_data_reduction_proxy_unknown": "0",
+      "daily_original_length_via_data_reduction_proxy_video": "0",
+      "daily_original_length_video": "0",
+      "daily_original_length_with_data_reduction_proxy_enabled": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+      "daily_original_length_with_data_reduction_proxy_enabled_application": "0",
+      "daily_original_length_with_data_reduction_proxy_enabled_unknown": "0",
+      "daily_original_length_with_data_reduction_proxy_enabled_video": "0",
+      "daily_received_length": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "37077658", "5479653", "0", "6664916", "0", "8800659" ],
+      "daily_received_length_application": "1283850",
+      "daily_received_length_https_with_data_reduction_proxy_enabled": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+      "daily_received_length_long_bypass_with_data_reduction_proxy_enabled": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+      "daily_received_length_short_bypass_with_data_reduction_proxy_enabled": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+      "daily_received_length_unknown": "207969",
+      "daily_received_length_unknown_with_data_reduction_proxy_enabled": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+      "daily_received_length_via_data_reduction_proxy": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+      "daily_received_length_via_data_reduction_proxy_application": "0",
+      "daily_received_length_via_data_reduction_proxy_unknown": "0",
+      "daily_received_length_via_data_reduction_proxy_video": "0",
+      "daily_received_length_video": "0",
+      "daily_received_length_with_data_reduction_proxy_enabled": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+      "daily_received_length_with_data_reduction_proxy_enabled_application": "0",
+      "daily_received_length_with_data_reduction_proxy_enabled_unknown": "0",
+      "daily_received_length_with_data_reduction_proxy_enabled_video": "0",
+      "last_update_date": "13185820800000000"
+   },
+   "data_reduction_lo_fi": {
+      "load_images_requests_per_session": 0,
+      "load_images_snackbars_shown_per_session": 0,
+      "was_used_this_session": false
+   },
+   "dns_prefetching": {
+      "host_referral_list": [ 2, [ "http://chrome.360.cn/", [ "http://chrome.360.cn/", 2.6799999999999997, "http://dd.browser.360.cn/", 2.34 ] ], [ "https://browser.360.cn/", [ "https://browser.360.cn/", 2.34, "https://s.ssl.qhres.com/", 2.34, "https://s4.ssl.qhimg.com/", 2.34 ] ], [ "https://ext.chrome.360.cn/", [ "https://ext.chrome.360.cn/", 8.317199999999998 ] ], [ "https://m3t5dmue2x-colab.googleusercontent.com/", [ "https://colab.research.google.com/", 2.34, "https://m3t5dmue2x-colab.googleusercontent.com/", 2.34 ] ], [ "http://www.ggfwzs.com/", [ "http://www.ggfwzs.com/", 5.399999999999999, "https://c.cnzz.com/", 2.34, "https://cnzz.mmstat.com/", 2.34, "https://s13.cnzz.com/", 2.34, "https://z7.cnzz.com/", 2.34 ] ], [ "http://www.youtube.com/", [ "https://www.youtube.com/", 2.34 ] ], [ "https://www.youtube.com/", [ "https://fonts.googleapis.com/", 2.34, "https://s.ytimg.com/", 2.34, "https://www.youtube.com/", 5.399999999999999, "https://yt3.ggpht.com/", 5.059999999999999 ] ], [ "http://www.google.com/", [ "https://www.google.com/", 2.34 ] ], [ "https://www.google.com/", [ "https://adservice.google.com/", 2.34, "https://apis.google.com/", 2.34, "https://ssl.gstatic.com/", 2.34, "https://www.google.com/", 5.059999999999999, "https://www.gstatic.com/", 2.34 ] ], [ "https://hao.360.cn/", [ "https://p0.ssl.qhimg.com/", 30.219999999999988, "https://p0.ssl.qhimgs4.com/", 6.079999999999998, "https://p1.ssl.qhimg.com/", 31.89959999999999, "https://p2.ssl.qhimg.com/", 19.339999999999993, "https://s.360.cn/", 8.799999999999997, "https://s0.ssl.qhres.com/", 2.34, "https://s3m.mediav.com/", 4.719999999999999, "https://ssxd.mediav.com/", 5.059999999999999, "https://stat.lianmeng.360.cn/", 2.6799999999999997, "https://track.mediav.com/", 2.34 ] ], [ "https://colab.research.google.com/", [ "https://accounts.google.com/", 1.8843999999999999, "https://apis.google.com/", 2.6731999999999996, "https://colab.research.google.com/", 10.098799999999997, "https://content.googleapis.com/", 1.5444, "https://fonts.googleapis.com/", 3.0131999999999994, "https://m3t5dmue2x-colab.googleusercontent.com/", 1.5444, "https://www.google-analytics.com/", 1.8843999999999999, "https://www.googleapis.com/", 1.5444, "https://www.gstatic.com/", 1.7688 ] ], [ "https://accounts.google.com/", [ "https://apis.google.com/", 1.8474079999999997, "https://ssl.gstatic.com/", 1.3593039999999998 ] ], [ "https://content.googleapis.com/", [ "https://apis.google.com/", 2.4488, "https://content.googleapis.com/", 1.8843999999999999 ] ] ],
+      "startup_list": [ 1, "https://gwtj.ssl.dhrest.com/", "https://hao.360.cn/", "https://max-l.mediav.com/", "https://p0.ssl.qhimg.com/", "https://p1.ssl.qhimg.com/", "https://s0.ssl.qhimg.com/", "https://s0.ssl.qhres.com/", "https://s1.ssl.qhres.com/", "https://show-g.mediav.com/", "https://ssxd.mediav.com/" ]
+   },
+   "download": {
+      "directory_upgrade": true
+   },
+   "ee": {
+      "browser": {
+         "history_count": 9
+      }
+   },
+   "extensions": {
+      "alerts": {
+         "initialized": true
+      },
+      "autoupdate": {
+         "last_check": "13185683128296475",
+         "next_check": "13185906022457694"
+      },
+      "chrome_url_overrides": {
+         "bookmarks": [ {
+            "active": true,
+            "entry": "chrome-extension://eemcgdkfndhakfknompkggombfjjjeno/main.html"
+         } ]
+      },
+      "commands": {
+
+      },
+      "garbagecollect": {
+         "lasttime": "13185467515052277"
+      },
+      "last_chrome_version": "9.5.0.138",
+      "settings": {
+         "ahfgeienlihckogmohjhadlkjgocpleb": {
+            "active_permissions": {
+               "api": [ "management", "system.display", "system.storage", "webstorePrivate", "system.cpu", "system.memory", "system.network" ],
+               "manifest_permissions": [  ]
+            },
+            "app_launcher_ordinal": "t",
+            "commands": {
+
+            },
+            "content_settings": [  ],
+            "creation_flags": 1,
+            "events": [  ],
+            "from_bookmark": false,
+            "from_webstore": false,
+            "incognito_content_settings": [  ],
+            "incognito_preferences": {
+
+            },
+            "install_time": "13185467485049101",
+            "location": 5,
+            "manifest": {
+               "app": {
+                  "launch": {
+                     "web_url": "https://chrome.google.com/webstore"
+                  },
+                  "urls": [ "https://chrome.google.com/webstore", "https://ext.chrome.360.cn", "https://skin.chrome.360.cn", "https://yun.chrome.360.cn", "https://yun.browser.360.cn" ]
+               },
+               "description": "在这里，您可以找到适用于 360极速浏览器 的精彩应用、游戏、扩展程序和主题背景。",
+               "icons": {
+                  "128": "webstore_icon_128.png",
+                  "16": "webstore_icon_16.png"
+               },
+               "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtl3tO0osjuzRsf6xtD2SKxPlTfuoy7AWoObysitBPvH5fE1NaAA1/2JkPWkVDhdLBWLaIBPYeXbzlHp3y4Vv/4XG+aN5qFE3z+1RU/NqkzVYHtIpVScf3DjTYtKVL66mzVGijSoAIwbFCC3LpGdaoe6Q1rSRDp76wR6jjFzsYwQIDAQAB",
+               "name": "Chrome 网上应用店",
+               "permissions": [ "webstorePrivate", "management", "themes", "tabs", "usercenter", "system.cpu", "system.display", "system.memory", "system.network", "system.storage" ],
+               "version": "0.2"
+            },
+            "never_activated_since_loaded": true,
+            "page_ordinal": "n",
+            "path": "D:\\360FB\\360Chrome\\Chrome\\Application\\9.5.0.138\\resources\\web_store",
+            "preferences": {
+
+            },
+            "regular_only_preferences": {
+
+            },
+            "state": 1,
+            "was_installed_by_default": false,
+            "was_installed_by_oem": false
+         },
+         "eemcgdkfndhakfknompkggombfjjjeno": {
+            "active_permissions": {
+               "api": [ "bookmarks", "bookmarkManagerPrivate", "management", "metricsPrivate", "systemPrivate", "tabs" ],
+               "explicit_host": [ "chrome://favicon/*", "chrome://resources/*" ],
+               "manifest_permissions": [  ]
+            },
+            "commands": {
+
+            },
+            "content_settings": [  ],
+            "creation_flags": 1,
+            "events": [  ],
+            "from_bookmark": false,
+            "from_webstore": false,
+            "incognito_content_settings": [  ],
+            "incognito_preferences": {
+
+            },
+            "initial_keybindings_set": true,
+            "install_time": "13185467485047106",
+            "location": 5,
+            "manifest": {
+               "chrome_url_overrides": {
+                  "bookmarks": "main.html"
+               },
+               "content_security_policy": "object-src 'none'; script-src chrome://resources 'self'",
+               "description": "Bookmark Manager",
+               "icons": {
+
+               },
+               "incognito": "split",
+               "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQcByy+eN9jzazWF/DPn7NW47sW7lgmpk6eKc0BQM18q8hvEM3zNm2n7HkJv/R6fU+X5mtqkDuKvq5skF6qqUF4oEyaleWDFhd1xFwV7JV+/DU7bZ00w2+6gzqsabkerFpoP33ZRIw7OviJenP0c0uWqDWF8EGSyMhB3txqhOtiQIDAQAB",
+               "manifest_version": 2,
+               "name": "Bookmark Manager",
+               "permissions": [ "bookmarks", "management", "bookmarkManagerPrivate", "metricsPrivate", "systemPrivate", "tabs", "chrome://favicon/", "chrome://resources/" ],
+               "version": "0.1"
+            },
+            "never_activated_since_loaded": true,
+            "path": "D:\\360FB\\360Chrome\\Chrome\\Application\\9.5.0.138\\resources\\bookmark_manager_360ee",
+            "preferences": {
+
+            },
+            "regular_only_preferences": {
+
+            },
+            "state": 1,
+            "was_installed_by_default": false,
+            "was_installed_by_oem": false
+         },
+         "kmendfapggjehodndflmmgagdbamhnfd": {
+            "active_permissions": {
+               "api": [ "cryptotokenPrivate", "externally_connectable.all_urls", "hid", "tabs", "u2fDevices", "usb", {
+                  "usbDevices": [ {
+                     "interfaceClass": -1,
+                     "interfaceId": -1,
+                     "productId": 529,
+                     "vendorId": 4176
+                  } ]
+               }, "webConnectable" ],
+               "explicit_host": [ "http://*/*", "https://*/*" ],
+               "manifest_permissions": [  ]
+            },
+            "commands": {
+
+            },
+            "content_settings": [  ],
+            "creation_flags": 1,
+            "events": [ "runtime.onConnectExternal", "runtime.onMessageExternal" ],
+            "from_bookmark": false,
+            "from_webstore": false,
+            "incognito_content_settings": [  ],
+            "incognito_preferences": {
+
+            },
+            "initial_keybindings_set": true,
+            "install_time": "13185467485049988",
+            "location": 5,
+            "manifest": {
+               "background": {
+                  "persistent": false,
+                  "scripts": [ "util.js", "b64.js", "sha256.js", "timer.js", "countdown.js", "countdowntimer.js", "devicestatuscodes.js", "approvedorigins.js", "errorcodes.js", "webrequest.js", "messagetypes.js", "factoryregistry.js", "closeable.js", "requesthelper.js", "enroller.js", "requestqueue.js", "signer.js", "origincheck.js", "textfetcher.js", "appid.js", "watchdog.js", "logging.js", "webrequestsender.js", "window-timer.js", "cryptotokenorigincheck.js", "cryptotokenapprovedorigins.js", "gnubbydevice.js", "hidgnubbydevice.js", "usbgnubbydevice.js", "gnubbies.js", "gnubby.js", "gnubby-u2f.js", "gnubbyfactory.js", "singlesigner.js", "multiplesigner.js", "generichelper.js", "inherits.js", "individualattest.js", "devicefactoryregistry.js", "usbhelper.js", "usbenrollhandler.js", "usbsignhandler.js", "usbgnubbyfactory.js", "googlecorpindividualattest.js", "cryptotokenbackground.js" ]
+               },
+               "description": "CryptoToken Component Extension",
+               "externally_connectable": {
+                  "accepts_tls_channel_id": true,
+                  "ids": [ "fjajfjhkeibgmiggdfehjplbhmfkialk" ],
+                  "matches": [ "\u003Call_urls>" ]
+               },
+               "incognito": "split",
+               "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq7zRobvA+AVlvNqkHSSVhh1sEWsHSqz4oR/XptkDe/Cz3+gW9ZGumZ20NCHjaac8j1iiesdigp8B1LJsd/2WWv2Dbnto4f8GrQ5MVphKyQ9WJHwejEHN2K4vzrTcwaXqv5BSTXwxlxS/mXCmXskTfryKTLuYrcHEWK8fCHb+0gvr8b/kvsi75A1aMmb6nUnFJvETmCkOCPNX5CHTdy634Ts/x0fLhRuPlahk63rdf7agxQv5viVjQFk+tbgv6aa9kdSd11Js/RZ9yZjrFgHOBWgP4jTBqud4+HUglrzu8qynFipyNRLCZsaxhm+NItTyNgesxLdxZcwOz56KD1Q4IQIDAQAB",
+               "manifest_version": 2,
+               "name": "CryptoTokenExtension",
+               "permissions": [ "hid", "u2fDevices", "usb", "cryptotokenPrivate", "externally_connectable.all_urls", "tabs", "https://*/*", "http://*/*", {
+                  "usbDevices": [ {
+                     "productId": 529,
+                     "vendorId": 4176
+                  } ]
+               } ],
+               "version": "0.9.46"
+            },
+            "never_activated_since_loaded": true,
+            "path": "D:\\360FB\\360Chrome\\Chrome\\Application\\9.5.0.138\\resources\\cryptotoken",
+            "preferences": {
+
+            },
+            "regular_only_preferences": {
+
+            },
+            "state": 1,
+            "was_installed_by_default": false,
+            "was_installed_by_oem": false
+         },
+         "mfehgcgbbipciphmccgaenjidiccnmng": {
+            "active_permissions": {
+               "api": [ "cloudPrintPrivate" ],
+               "manifest_permissions": [  ]
+            },
+            "commands": {
+
+            },
+            "content_settings": [  ],
+            "creation_flags": 1,
+            "events": [  ],
+            "from_bookmark": false,
+            "from_webstore": false,
+            "incognito_content_settings": [  ],
+            "incognito_preferences": {
+
+            },
+            "install_time": "13185467485048342",
+            "location": 5,
+            "manifest": {
+               "app": {
+                  "launch": {
+                     "web_url": "https://www.google.com/cloudprint"
+                  },
+                  "urls": [ "https://www.google.com/cloudprint/enable_chrome_connector" ]
+               },
+               "description": "Cloud Print",
+               "display_in_launcher": false,
+               "icons": {
+
+               },
+               "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDqOhnwk4+HXVfGyaNsAQdU/js1Na56diW08oF1MhZiwzSnJsEaeuMN9od9q9N4ZdK3o1xXOSARrYdE+syV7Dl31nf6qz3A6K+D5NHe6sSB9yvYlIiN37jdWdrfxxE0pRYEVYZNTe3bzq3NkcYJlOdt1UPcpJB+isXpAGUKUvt7EQIDAQAB",
+               "name": "Cloud Print",
+               "permissions": [ "cloudPrintPrivate" ],
+               "version": "0.1"
+            },
+            "never_activated_since_loaded": true,
+            "path": "D:\\360FB\\360Chrome\\Chrome\\Application\\9.5.0.138\\resources\\cloud_print",
+            "preferences": {
+
+            },
+            "regular_only_preferences": {
+
+            },
+            "state": 1,
+            "was_installed_by_default": false,
+            "was_installed_by_oem": false
+         },
+         "mhjfbmdgcfjbbpaeojofohoefgiehjai": {
+            "active_permissions": {
+               "api": [ "resourcesPrivate" ],
+               "explicit_host": [ "\u003Call_urls>", "chrome://favicon/*" ],
+               "manifest_permissions": [  ]
+            },
+            "commands": {
+
+            },
+            "content_settings": [  ],
+            "creation_flags": 1,
+            "events": [  ],
+            "from_bookmark": false,
+            "from_webstore": false,
+            "incognito_content_settings": [  ],
+            "incognito_preferences": {
+
+            },
+            "initial_keybindings_set": true,
+            "install_time": "13185467485050732",
+            "location": 5,
+            "manifest": {
+               "content_security_policy": "script-src 'self' blob: filesystem: chrome://resources; object-src * blob: externalfile: file: filesystem: data:; plugin-types application/x-google-chrome-pdf",
+               "description": "",
+               "incognito": "split",
+               "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDN6hM0rsDYGbzQPQfOygqlRtQgKUXMfnSjhIBL7LnReAVBEd7ZmKtyN2qmSasMl4HZpMhVe2rPWVVwBDl6iyNE/Kok6E6v6V3vCLGsOpQAuuNVye/3QxzIldzG/jQAdWZiyXReRVapOhZtLjGfywCvlWq7Sl/e3sbc0vWybSDI2QIDAQAB",
+               "manifest_version": 2,
+               "mime_types": [ "application/pdf" ],
+               "mime_types_handler": "index.html",
+               "name": "Chromium PDF Viewer",
+               "offline_enabled": true,
+               "permissions": [ "\u003Call_urls>", "resourcesPrivate" ],
+               "version": "1",
+               "web_accessible_resources": [ "*.js", "*.html", "*.css", "*.png" ]
+            },
+            "never_activated_since_loaded": true,
+            "path": "D:\\360FB\\360Chrome\\Chrome\\Application\\9.5.0.138\\resources\\pdf",
+            "preferences": {
+
+            },
+            "regular_only_preferences": {
+
+            },
+            "state": 1,
+            "was_installed_by_default": false,
+            "was_installed_by_oem": false
+         }
+      },
+      "theme": {
+         "id": "jisu9"
+      },
+      "toolbar": [  ]
+   },
+   "gcm": {
+      "product_category_for_subtypes": "cn.360chrome.windows"
+   },
+   "hmi": false,
+   "homepage": "https://hao.360.cn/",
+   "homepage_is_newtabpage": false,
+   "http_original_content_length": "58022886",
+   "http_received_content_length": "58022886",
+   "invalidator": {
+      "client_id": "MIwN8by6YsVuZBHd12KwgA=="
+   },
+   "kMouseGestureProfile": {
+      "kMGPUserOpenNewTabOrder": 0
+   },
+   "language_model_counters": {
+      "zh-CN": 16
+   },
+   "media": {
+      "device_id_salt": "fctLMQ6pjwLhtFNWQydrvA==",
+      "engagement": {
+         "schema_version": 3
+      }
+   },
+   "net": {
+      "network_qualities": {
+         ",1": "4G"
+      }
+   },
+   "ntp": {
+      "app_page_names": [ "应用" ],
+      "num_personal_suggestions": 8,
+      "pinned_urls": {
+
+      },
+      "shown_page": 1024
+   },
+   "partition": {
+      "per_host_zoom_levels": {
+
+      }
+   },
+   "pinned_tabs": [  ],
+   "plugins": {
+      "npapi_flash_migrated_to_pepper_flash": true,
+      "plugins_list": [  ]
+   },
+   "preset_popup_host_loaded": 3,
+   "profile": {
+      "avatar_bubble_tutorial_shown": 2,
+      "avatar_index": 26,
+      "content_settings": {
+         "domain_to_origin_migration_status": 1,
+         "exceptions": {
+            "accessibility_events": {
+
+            },
+            "app_banner": {
+
+            },
+            "auto_select_certificate": {
+
+            },
+            "automatic_downloads": {
+
+            },
+            "autoplay": {
+
+            },
+            "background_sync": {
+
+            },
+            "bluetooth_guard": {
+
+            },
+            "client_hints": {
+
+            },
+            "cookies": {
+
+            },
+            "durable_storage": {
+
+            },
+            "fullscreen": {
+
+            },
+            "geolocation": {
+
+            },
+            "images": {
+
+            },
+            "important_site_info": {
+
+            },
+            "javascript": {
+
+            },
+            "media_engagement": {
+               "chrome-extension://gocklaboggjfkolaknpbhddbaopcepfp/,*": {
+                  "last_modified": "13185901354996045",
+                  "setting": {
+                     "hasHighScore": false,
+                     "lastMediaPlaybackTime": 0.0,
+                     "mediaPlaybacks": 0,
+                     "visits": 3
+                  }
+               },
+               "http://chrome.360.cn:80,*": {
+                  "last_modified": "13185467488695146",
+                  "setting": {
+                     "hasHighScore": false,
+                     "lastMediaPlaybackTime": 0.0,
+                     "mediaPlaybacks": 0,
+                     "visits": 1
+                  }
+               },
+               "http://www.ggfwzs.com:80,*": {
+                  "last_modified": "13185508626210569",
+                  "setting": {
+                     "hasHighScore": false,
+                     "lastMediaPlaybackTime": 0.0,
+                     "mediaPlaybacks": 0,
+                     "visits": 1
+                  }
+               },
+               "https://browser.360.cn:443,*": {
+                  "last_modified": "13185467507901525",
+                  "setting": {
+                     "hasHighScore": false,
+                     "lastMediaPlaybackTime": 0.0,
+                     "mediaPlaybacks": 0,
+                     "visits": 1
+                  }
+               },
+               "https://colab.research.google.com:443,*": {
+                  "last_modified": "13185905760772845",
+                  "setting": {
+                     "hasHighScore": false,
+                     "lastMediaPlaybackTime": 0.0,
+                     "mediaPlaybacks": 0,
+                     "visits": 3
+                  }
+               },
+               "https://ext.chrome.360.cn:443,*": {
+                  "last_modified": "13185467738482783",
+                  "setting": {
+                     "hasHighScore": false,
+                     "lastMediaPlaybackTime": 0.0,
+                     "mediaPlaybacks": 0,
+                     "visits": 2
+                  }
+               },
+               "https://hao.360.cn:443,*": {
+                  "last_modified": "13185905760788175",
+                  "setting": {
+                     "hasHighScore": false,
+                     "lastMediaPlaybackTime": 0.0,
+                     "mediaPlaybacks": 0,
+                     "visits": 13
+                  }
+               },
+               "https://www.google.com:443,*": {
+                  "last_modified": "13185901406814627",
+                  "setting": {
+                     "hasHighScore": false,
+                     "lastMediaPlaybackTime": 0.0,
+                     "mediaPlaybacks": 0,
+                     "visits": 1
+                  }
+               },
+               "https://www.youtube.com:443,*": {
+                  "last_modified": "13185901406828555",
+                  "setting": {
+                     "hasHighScore": false,
+                     "lastMediaPlaybackTime": 0.0,
+                     "mediaPlaybacks": 0,
+                     "visits": 1
+                  }
+               }
+            },
+            "media_stream_camera": {
+
+            },
+            "media_stream_mic": {
+
+            },
+            "midi_sysex": {
+
+            },
+            "mixed_script": {
+
+            },
+            "mouselock": {
+
+            },
+            "notifications": {
+
+            },
+            "password_protection": {
+
+            },
+            "permission_autoblocking_data": {
+
+            },
+            "plugins": {
+
+            },
+            "popups": {
+               "[*.]99bill.com,*": {
+                  "last_modified": "13185467484713441",
+                  "setting": 1
+               },
+               "[*.]alipay.com,*": {
+                  "last_modified": "13185467484713540",
+                  "setting": 1
+               },
+               "[*.]dangdang.com,*": {
+                  "last_modified": "13185467484713587",
+                  "setting": 1
+               },
+               "[*.]ipos.10086.cn,*": {
+                  "last_modified": "13185467484713385",
+                  "setting": 1
+               },
+               "[*.]netpay.sdo.com,*": {
+                  "last_modified": "13185467484713294",
+                  "setting": 1
+               },
+               "[*.]pay.ips.com.cn,*": {
+                  "last_modified": "13185467484713487",
+                  "setting": 1
+               },
+               "[*.]pay.soopay.net,*": {
+                  "last_modified": "13185467484713466",
+                  "setting": 1
+               },
+               "[*.]payment.chinapnr.com,*": {
+                  "last_modified": "13185467484713415",
+                  "setting": 1
+               },
+               "[*.]pingan.com,*": {
+                  "last_modified": "13185467484713563",
+                  "setting": 1
+               },
+               "[*.]tenpay.com,*": {
+                  "last_modified": "13185467484713517",
+                  "setting": 1
+               }
+            },
+            "ppapi_broker": {
+
+            },
+            "prompt_no_decision_count": {
+
+            },
+            "protocol_handler": {
+
+            },
+            "sensors": {
+
+            },
+            "site_engagement": {
+               "http://www.ggfwzs.com:80,*": {
+                  "last_modified": "13185901286367207",
+                  "setting": {
+                     "lastEngagementTime": 13185872486367036.0,
+                     "lastShortcutLaunchTime": 0.0,
+                     "pointsAddedToday": 2.1,
+                     "rawScore": 2.1
+                  }
+               },
+               "https://colab.research.google.com:443,*": {
+                  "last_modified": "13185905753264580",
+                  "setting": {
+                     "lastEngagementTime": 13185905753264560.0,
+                     "lastShortcutLaunchTime": 0.0,
+                     "pointsAddedToday": 3.6,
+                     "rawScore": 3.6
+                  }
+               },
+               "https://ext.chrome.360.cn:443,*": {
+                  "last_modified": "13185901286367104",
+                  "setting": {
+                     "lastEngagementTime": 13185842555625252.0,
+                     "lastShortcutLaunchTime": 0.0,
+                     "pointsAddedToday": 4.5,
+                     "rawScore": 4.5
+                  }
+               },
+               "https://www.google.com:443,*": {
+                  "last_modified": "13185901386873657",
+                  "setting": {
+                     "lastEngagementTime": 13185901386873644.0,
+                     "lastShortcutLaunchTime": 0.0,
+                     "pointsAddedToday": 3.0,
+                     "rawScore": 3.0
+                  }
+               },
+               "https://www.youtube.com:443,*": {
+                  "last_modified": "13185901364643372",
+                  "setting": {
+                     "lastEngagementTime": 13185901364643360.0,
+                     "lastShortcutLaunchTime": 0.0,
+                     "pointsAddedToday": 3.0,
+                     "rawScore": 3.0
+                  }
+               }
+            },
+            "sound": {
+
+            },
+            "ssl_cert_decisions": {
+
+            },
+            "subresource_filter": {
+
+            },
+            "subresource_filter_data": {
+
+            },
+            "usb_chooser_data": {
+
+            }
+         },
+         "pref_version": 1
+      },
+      "created_by_version": "9.5.0.138",
+      "exit_type": "Normal",
+      "exited_cleanly": true,
+      "icon_version": 4,
+      "last_engagement_time": "13185905753264560",
+      "managed_user_id": "",
+      "name": "用户1",
+      "per_host_zoom_levels": {
+
+      },
+      "switch_mode_type": 1,
+      "was_obsolete_http_data_cleaned": true
+   },
+   "safemonLockHomePage": 0,
+   "safemon_lock_search": 0
+}

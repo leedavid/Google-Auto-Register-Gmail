@@ -1,0 +1,106 @@
+{
+   "browser": {
+      "enabled_labs_experiments": [ "disable-direct-write", "enable-tab-audio-muting" ],
+      "hung_plugin_detect_freq": 2000,
+      "last_redirect_origin": "",
+      "last_welcomed_os_version": "10.0",
+      "plugin_message_response_timeout": 25000
+   },
+   "component_update": {
+      "npflash": {
+         "7zfilesize": "8215265",
+         "comfilepath": "E:\\谷歌自动挂机发布\\360Chrome\\Chrome\\Application\\components\\npflash\\27_0_0_187"
+      },
+      "ppflash": {
+         "7zfilesize": "7604886",
+         "comfilepath": "E:\\谷歌自动挂机发布\\360Chrome\\Chrome\\Application\\components\\ppflash\\27_0_0_187"
+      }
+   },
+   "easy_unlock": {
+      "device_id": "5be4289c-9fc6-4ae0-a229-4c227a5b94e5"
+   },
+   "hardware_acceleration_mode_previous": true,
+   "profile": {
+      "info_cache": {
+         "Default": {
+            "active_time": 1541751116.145159,
+            "avatar_icon": "chrome://theme/IDR_PROFILE_AVATAR_0",
+            "background_apps": false,
+            "gaia_id": "",
+            "is_ephemeral": false,
+            "is_omitted_from_profile_list": false,
+            "is_using_default_avatar": true,
+            "is_using_default_name": true,
+            "managed_user_id": "",
+            "name": "用户1",
+            "user_name": ""
+         }
+      },
+      "last_active_profiles": [  ]
+   },
+   "rappor": {
+      "cohort_seed": 149,
+      "secret": "m+YzM9ryrYltRuj26vjZOmzsujbNKR8Nurf/YiLo8q6b/qR7ZTdIif0cYEXXGKpE"
+   },
+   "show-first-run-bubble-option": 0,
+   "shutdown": {
+      "num_processes": 0,
+      "num_processes_slow": 0,
+      "type": 0
+   },
+   "skin": {
+      "info": {
+         "crxid": "jisu9",
+         "id": 9,
+         "name": "",
+         "url": "",
+         "version": ""
+      }
+   },
+   "startup_metric": {
+      "last_startup_timestamp": "13186224715397553",
+      "last_startup_version": "9.5.0.138",
+      "same_version_startup_count": 1
+   },
+   "sync_login_info": {
+      "filepath": "",
+      "qid": ""
+   },
+   "tab_stats": {
+      "last_daily_sample": "13186224716198324",
+      "max_tabs_per_window": 2,
+      "total_tab_count_max": 2,
+      "window_count_max": 1
+   },
+   "ukm": {
+      "persisted_logs": [  ]
+   },
+   "uninstall_metrics": {
+      "installation_date2": "1541751115",
+      "launch_count": "1"
+   },
+   "user_experience_metrics": {
+      "low_entropy_source2": 6111,
+      "session_id": 0,
+      "stability": {
+         "breakpad_registration_fail": 0,
+         "breakpad_registration_ok": 0,
+         "crash_count": 0,
+         "debugger_not_present": 1,
+         "debugger_present": 0,
+         "deferred_count": 0,
+         "discard_count": 1,
+         "execution_phase": 700,
+         "exited_cleanly": true,
+         "incomplete_session_end_count": 0,
+         "launch_count": 1,
+         "session_end_completed": true,
+         "stats_buildtime": "1535000400",
+         "stats_version": "9.5.0.138",
+         "version_mismatch_count": 0
+      }
+   },
+   "was": {
+      "restarted": false
+   }
+}

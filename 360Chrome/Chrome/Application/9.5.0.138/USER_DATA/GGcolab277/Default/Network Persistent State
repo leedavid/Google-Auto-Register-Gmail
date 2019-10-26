@@ -1,0 +1,48 @@
+{
+   "net": {
+      "http_server_properties": {
+         "servers": [ {
+            "https://s4.ssl.qhimg.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://s0.ssl.qhimg.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://browser.360.cn": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://s.ssl.qhres.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://hao.ssl.dhrest.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://p.ssl.qhimg.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://p0.ssl.qhimgs4.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://s0.ssl.qhres.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://p0.ssl.qhimg.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://cdn.weather.hao.360.cn": {
+               "supports_spdy": true
+            }
+         } ],
+         "version": 5
+      }
+   }
+}

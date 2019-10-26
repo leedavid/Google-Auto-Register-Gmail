@@ -1,0 +1,1657 @@
+if(!window.console){
+	window.console={log:function(){}}
+}
+ function htmlspecialchars(str) {
+	 if (typeof(str) == "string") {
+		  str = str.replace(/&/g, "&amp;"); /* must do &amp; first */
+		  str = str.replace(/"/g, "&quot;");
+		  str = str.replace(/'/g, "&#039;");
+		  str = str.replace(/</g, "&lt;");
+		  str = str.replace(/>/g, "&gt;");
+	  }
+	 return str;
+  }
+
+var __d=__d||[],__presetdata=__initData;
+var URLCONF={domain:__d[0]||"https://ext.chrome.360.cn",webroot:__d[1]||"/webstore/"};
+var CATETYPEMAP = {}, CATENAMEMAP = {}, CATEIDMAP = {}, SORTTYPEMAP = {};
+var SORTMAP = {'download':'编辑推荐', 'hot':'最受欢迎', 'lastupdate':'最近更新'};
+var SORTMAP2 = {"编辑推荐":"download", "最受欢迎":"hot", "最近更新":"lastupdate"};
+(function () {
+    for (var i = 0, len = _ExtCate.length; i < len; i++) {
+        CATETYPEMAP[_ExtCate[i]["id"]] = _ExtCate[i]['cate'];
+        CATENAMEMAP[_ExtCate[i]['id']] = _ExtCate[i]['cate'];
+        CATEIDMAP[_ExtCate[i]['cate']] = _ExtCate[i]['id'];
+    }
+})();
+var ExtRouter = Backbone.Router.extend({
+    routes:{
+        "search/:keyword":"viewsearch",
+        "category/:type/:sort":"viewcategory",
+        "detail/:id":"viewdetail",
+        "*actions":"defaultroute"
+    },
+    initialize:function () {
+
+    },
+    viewsearch:function (keyword) {
+        PATH.update("search", keyword);
+        $("#search-form input[name=q]").val(keyword);
+    },
+    viewcategory:function (type, sort) {
+      if (CATEIDMAP[type] && SORTMAP2[sort]) {
+          $('#header-category').text(sort);
+          $("#category-type li").removeClass("cur").parent().find("a[type=" + CATEIDMAP[type] + "]").parent().addClass("cur");
+          fixNav();
+          document.title = "扩展中心 - 360极速浏览器 - " + type;
+          PATH.sorttype = SORTMAP2[sort];
+          PATH.update("category", type);
+          $("#search-form input[name=q]").val("");
+        } else {
+          this.navigate("category/" + CATENAMEMAP[_ExtCate[0]['id']] + '/' + SORTMAP[PATH.sorttype], {trigger:true});
+        }
+    },
+    viewdetail:function (extid) {
+        PATH.update("detail", extid);
+    },
+    defaultroute:function (actions) {
+        this.navigate("category/" + CATETYPEMAP[_ExtCate[0]['id']] + '/' + SORTMAP[PATH.sorttype], {trigger:true});
+    }
+});
+(function () {
+    var depends = {
+        version:{
+            gte:function (srcver, targetver) {
+                return !depends.version.lt(srcver, targetver);
+            },
+            gt:function (srcver, targetver) {
+                var srcarr = srcver.split(".");
+                var tararr = targetver.split(".");
+                var len = srcarr.length > tararr.length ? srcarr.length : tararr.length;
+                var s = 0, t = 0;
+                for (var i = 0; i < len; i++) {
+                    s = parseInt(srcarr[i], 10) || 0;
+                    t = parseInt(tararr[i], 10) || 0;
+                    if (s > t) {
+                        return true;
+                    } else if (s < t) {
+                        return false;
+                    }
+                }
+                return false;
+            },
+            lt:function (srcver, targetver) {
+                var srcarr = srcver.split(".");
+                var tararr = targetver.split(".");
+                var len = srcarr.length > tararr.length ? srcarr.length : tararr.length;
+                var s = 0, t = 0;
+                for (var i = 0; i < len; i++) {
+                    s = parseInt(srcarr[i], 10) || 0;
+                    t = parseInt(tararr[i], 10) || 0;
+                    if (s < t) {
+                        return true;
+                    } else if (s > t) {
+                        return false;
+                    }
+                }
+                return false;
+            },
+            lte:function (srcver, targetver) {
+                return !depends.version.gt(srcver, targetver);
+            }
+        }
+    };
+    window.depends = depends;
+})();
+(function () {
+    var chromeapi = {
+        installExt:function (extobj) {
+            var img = new Image();
+            img.src="http://dd.browser.360.cn/static/a/154.6126.gif?crx_id=" + extobj["crx_id"] + "&rn=" + Math.random();
+			$.get(URLCONF["domain"]+"/provider/clk/"+extobj["crx_id"]);
+            window.open(extobj['filename'], "_self");
+            return false;
+        },
+		GetRunPath: function(){
+			try {
+				var path = external.GetRunPath(external.GetSID(window));
+				return path.toLowerCase();
+			} catch (e) {
+				return '';
+			}
+		},
+		Is360Chrome: function(){
+			return this.GetRunPath().indexOf('360chrome.exe') > -1;
+		},
+    is360chrome:function () {
+        var _is360chrome=false;
+        try{
+          if(typeof( chrome )!= "undefined" && typeof( chrome.webstorePrivate)!='undefined' && typeof (chrome.webstorePrivate.beginInstallWithManifest3)!='undefined'){
+            _is360chrome=true;
+          }else {
+            _is360chrome=navigator.userAgent.toLowerCase().indexOf('360ee')!=-1;
+          }
+        }catch(e){};
+        return _is360chrome||this.Is360Chrome();  
+      }
+    };
+    if (typeof chrome != "undefined" && chrome.webstorePrivate && chrome.webstorePrivate.beginInstallWithManifest3) {
+		if(chromeapi.is360chrome()&&depends.version.gte(navigator.userAgent.match(/(Chrome\/\S*)/)[0].split("/")[1],"300.0.963.83")){
+		chromeapi.installExt = function (extobj) {
+            try {
+                var img = new Image();
+                img.src="http://dd.browser.360.cn/static/a/154.6126.gif?crx_id=" + extobj["crx_id"] + "&rn=" + Math.random();
+                manifest = extobj['manifest'];
+                var dobj = {id:extobj["crx_id"], manifest:manifest,iconUrl:extobj["logo"], locale:extobj['default_locale'], localizedName:extobj['name'], is360WebStore:true, crx360DownloadUrl:"https://ext.chrome.360.cn/provider/crxInstall"};
+                chrome.webstorePrivate.beginInstallWithManifest3(dobj, function (a) {
+                    if (a) {
+                    } else {
+						$.get(URLCONF["domain"]+"/provider/clk/"+extobj["crx_id"]);
+                        chrome.webstorePrivate.completeInstall(extobj['crx_id'], function () {
+							
+                        });
+                    }
+                });
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
+		}
+    }
+    try {
+        chrome.management.onUninstalled.addListener(function (id) {
+			chromeapi.updateExtCount();
+			delete window.DC.installedextcache[id];
+            if (DC.extcache[id]) {
+				DC.extcache[id]["status"] = "install";
+            }
+			chromeapi.updateStatus(id, 'install');
+            return;
+        });
+        chrome.management.onInstalled.addListener(function (items) {
+				chromeapi.updateExtCount();
+				var id = items["id"];
+				var status = 'installed';
+				if(DC.extcache[id]){
+					DC.extcache[id]["status"] = status;
+					if (depends.version.lt(items['version'], DC.extcache[id]['version'])) {
+						DC.extcache[id]["status"] = status = "update";
+					}
+				}
+				DC.installedextcache[id] = items;
+				chromeapi.updateStatus(id, status);
+                return;
+            }
+        );
+    } catch (e) {
+
+    }
+	
+	chromeapi.updateStatus = function(id, status) {
+		$('[extid=' + id + '] .install-status').removeClass('add-btn installed-btn update-btn installing-btn').addClass({"installing":"installing-btn","install":"add-btn", "installed":"installed-btn","update":"update-btn"}[status]);
+		$('[extid=' + id + '] .install-status').text({"installing":"下载中","install":"安装","installed":"已安装","update":"可更新"}[status]);
+		$('[extid=' + id + '] .slide-install').removeClass('slide-install-add-btn slide-install-installed-btn slide-install-update-btn slide-install-installing-btn')
+			      .addClass({"installing":"slide-install-installing-btn","install":"slide-install-add-btn", "installed":"slide-install-installed-btn","update":"slide-install-update-btn"}[status]);
+	};
+	
+	
+	
+	chromeapi.updateExtCount = function(){
+		try {
+			chrome.management.getAll(function (extlist) {
+				chrome.themes.getAll(function(themes){
+					var count = 0;
+					extlist.forEach(function(ext){
+						var isTheme = false;
+						themes.every(function(theme){
+							if (ext.id == theme.id) {
+								isTheme = true;
+								return false;
+							}
+							return true;
+						});
+						if (!ext.isApp && !isTheme)	count++;
+					});
+					$('#myext_count').text('(' + count + ')');
+				});
+			});
+		} catch(e) {}
+	};
+
+    window.chromeapi = chromeapi;
+})();
+
+var QueryObj = function (viewtype, param, count, sorttype, token) {
+    this.viewtype = viewtype || "category";
+    this.param = param || CATETYPEMAP[_ExtCate[0]['id']];
+    this.count = count || 20;
+    this.sorttype = sorttype || "hot";
+    this.token = token || 0;
+};
+QueryObj.prototype.serialize = function () {
+    return "[" + this.viewtype + ":" + this.param + ":" + this.count + ":" + this.sorttype + ":" + this.token + "]";
+};
+QueryObj.prototype.genQueryUrl = function () {
+    if (!this.param) {
+        this.viewtype = "category";
+    }
+    if (this.viewtype == "search") {
+        return URLCONF['domain']+"/provider/extlist/" + encodeURIComponent(this.param) + "?count=" + this.count + "&sortType=" + this.sorttype + "&token=" + this.token;
+    } else if (this.viewtype == "category") {
+        return URLCONF['domain']+"/provider/extlist/?category=" + encodeURIComponent(this.param) + "&count=" + this.count + "&sortType=" + this.sorttype + "&token=" + this.token;
+    } else if (this.viewtype == "detail") {
+        return URLCONF['domain']+"/provider/extone/" + encodeURIComponent(this.param);
+    }
+};
+QueryObj.prototype.toString = function () {
+    return this.serialize();
+}
+QueryObj.unserialize = function (str) {
+    return new QueryObj();
+};
+var DC =window.DC|| {
+    datafix:function (extobj) {
+//        extobj['moredesc']=extobj['moredesc'].split(/[<br \/>||\n]+/).join("");
+        extobj['descpic'] = JSON.parse(extobj['descpic']);
+        extobj["s_descpic"] = _.map(extobj["descpic"], function (pic) {
+            var index = pic.lastIndexOf("/");
+            return  pic.substring(0, index) + "/s_" + pic.substr(index + 1);
+        });
+		var d=new Date();
+		d.setTime(parseInt(extobj['lastupdate'])*1000);
+		extobj['_lastupdate']=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+/*
+        extobj['descpic'] = ["https://lh4.googleusercontent.com/zX5PjKJHX6fiwkzZ3zZwggVpds0vgd6JdcR1Bxf-odaKcUuDIgrGCMvbUCuWa2u2knSxTLFH=s640-h400-e365",
+            "https://lh6.googleusercontent.com/AKnSEdJy_LLg-qNc1IzNPuOVBGMYMmcqy7GO1LCSwIqPDexoV-aFA-Xyx0LuW8GFD2OtONb5=s640-h400-e365",
+            "https://lh5.googleusercontent.com/vtJuSgq13EKn1ySvJx2fbsooMzpy6xMe-zWdKlEpIXgH5xxhJL0fO1x2MWhwRL8laRgwOWC0vg=s640-h400-e365"];
+        extobj['s_descpic'] = ["https://lh4.googleusercontent.com/zX5PjKJHX6fiwkzZ3zZwggVpds0vgd6JdcR1Bxf-odaKcUuDIgrGCMvbUCuWa2u2knSxTLFH=s120-h90-e365",
+            "https://lh6.googleusercontent.com/AKnSEdJy_LLg-qNc1IzNPuOVBGMYMmcqy7GO1LCSwIqPDexoV-aFA-Xyx0LuW8GFD2OtONb5=s120-h90-e365",
+            "https://lh5.googleusercontent.com/vtJuSgq13EKn1ySvJx2fbsooMzpy6xMe-zWdKlEpIXgH5xxhJL0fO1x2MWhwRL8laRgwOWC0vg=s120-h90-e365"];
+  */      
+		extobj['cates'] = extobj['cates'].split(" ");
+        //extobj['default_locale'] = (extobj['manifest'].split("\"default_locale\":\"")[1] || "zh_CN").split("\"")[0];
+        extobj['default_locale'] = "zh_CN";
+    },
+    getData:function (queryobj, cb) {
+        if (DC.queue[queryobj.serialize()]) {
+            return;
+        }
+        var data = this.getCacheData(queryobj);
+        if (data) {
+            cb(data, queryobj);
+            return;
+        }
+        if (this.noMoreData(queryobj)) {
+			cb({},queryobj);
+            return;
+        }
+        this.queue[queryobj.serialize()] = {"cb":cb};	
+		$.get(queryobj.genQueryUrl(), function(data){DC.onGetData(queryobj,data)});
+        return;
+    },
+	onGetData:function (queryobj,data) {
+		if(typeof(data)!="object"){
+			try{
+				data = JSON.parse(data);
+			}catch(e){
+				if(queryobj.viewtype!="category"){
+					window.extrouter.navigate("category",{trigger:true});
+					return;
+				}
+			}
+		}
+		var extobj;
+		if (queryobj.viewtype != "detail") {
+			for (var i = 0, len = data['list'].length; i < len; i++) {
+				extobj = data['list'][i];
+				if(!DC.extcache[extobj['crx_id']]){
+					DC.extcache[extobj['crx_id']] = extobj;
+					extobj["status"]="install";
+				}
+				DC.datafix(extobj);
+				if (DC.installedextcache[extobj['crx_id']]) {
+					if(DC.extcache[extobj['crx_id']]["status"]== "install"){
+						DC.extcache[extobj['crx_id']]["status"]= "installed";
+						if (depends.version.lt(DC.installedextcache[extobj['crx_id']]['version'], extobj['version'])) {
+							extobj["status"] = "update";
+						}
+					}
+				} else {
+					if(DC.extcache[extobj['crx_id']]) {
+						extobj["status"] = DC.extcache[extobj['crx_id']]['status'];
+					} else {
+						extobj["status"] = "install";
+					}
+				}
+			}
+		} else {
+			DC.extcache[data['crx_id']] = data;
+			DC.datafix(data);
+			if (DC.installedextcache[data['crx_id']]) {
+				data["status"] = "installed";
+				if (depends.version.lt(DC.installedextcache[data['crx_id']]['version'], data['version'])) {
+					data["status"] = "update";
+				}
+			} else {
+				data["status"] = "install";
+			}
+		}
+		DC.datacache[queryobj.viewtype] = DC.datacache[queryobj.viewtype] || {};
+		DC.datacache[queryobj.viewtype][queryobj.param] = DC.datacache[queryobj.viewtype][queryobj.param] || {};
+		DC.datacache[queryobj.viewtype][queryobj.param][queryobj.sorttype] = DC.datacache[queryobj.viewtype][queryobj.param][queryobj.sorttype] || {data:[], nomoreleft:0};
+		var url = queryobj.serialize();
+		var d = {};
+		d[url] = data;
+		DC.datacache[queryobj.viewtype][queryobj.param][queryobj.sorttype]['data'].push(d);
+		DC.datacache[queryobj.viewtype][queryobj.param][queryobj.sorttype]['nomoreleft'] = (data['left'] == 0);
+		DC.queue[queryobj.serialize()]&&DC.queue[queryobj.serialize()]["cb"]&&DC.queue[queryobj.serialize()]["cb"](data, queryobj);
+		delete DC.queue[queryobj.serialize()];
+	},
+    getCacheData:function (queryobj) {
+        var _data = DC.datacache[queryobj.viewtype] || {};
+        _data = _data[queryobj.param] || {};
+        _data = _data[queryobj.sorttype] || {};
+        var key = queryobj.serialize();
+        _data = _data['data'] || [];
+		var _begin=false;
+		var _lastdata={};
+		var rs=[];
+        for (var i = 0, len = _data.length; i < len; i++) {
+		if(_begin==false){
+			if(_data[i][key]){
+				if(_data[i][key]['list']){
+					_begin=true;
+					_lastdata=_data[i][key];
+					rs=rs.concat(_data[i][key]['list']);
+				}
+			}
+		}else{
+			for(var k in _data[i]){
+				if(_data[i][k]){
+					if(_data[i][k]['list']){
+						_lastdata=_data[i][k];
+						rs=rs.concat(_data[i][k]['list']);
+					}
+				}
+			}
+		}
+        }
+		if(rs.length>0){		
+			return {left:_lastdata['left'],list:rs,query:{category:(queryobj.viewtype=="category"?queryobj.param:""),count:queryobj.count,search:(queryobj.viewtype=="search"?queryobj.param:""),sortType:queryobj.sorttype,token:""},token:_lastdata['token'],total:rs.length}
+		}
+        return;
+    },
+    getExt:function (crx_id, cb) {
+        if (this.extcache[crx_id]) {
+            cb(this.extcache[crx_id]);
+        } else {
+            this.getData(new QueryObj("detail", crx_id, 1, 'hot', 0), cb);
+        }
+    },
+    getInstalledData:function () {
+        try {
+            chrome.management.getAll(function (extlist) {
+				function oninstalled(items) {		
+					console.log('onGetInstalledData');
+					var id = items["id"];
+					if(DC.extcache[id]){
+						DC.extcache[id]["status"]="installed";
+						if (depends.version.lt(items['version'], DC.extcache[id]['version'])) {
+							DC.extcache[id]["status"] = "update";
+						}
+						DC.installedextcache[id] = DC.extcache[id];
+					}else{
+						DC.installedextcache[id] = items;
+					}
+					var status = DC.extcache[id]&&DC.extcache[id]["status"]||"installed";
+					chromeapi.updateStatus(id, status);
+					return;
+				}
+                for (var i = 0, len = extlist.length; i < len; i++) {
+					oninstalled(extlist[i]);
+                }
+            });
+        } catch (e) {
+        }
+		var presetqueryobj=__presetdata["query"];
+		var queryobj=new QueryObj((presetqueryobj.search!=""?"search":"category"),presetqueryobj.search||(presetqueryobj.category)||"全部",presetqueryobj.count,presetqueryobj.sortType,0);
+		if(presetqueryobj[queryobj.viewtype]==queryobj.param
+			&&presetqueryobj.sortType==queryobj.sorttype
+			&&presetqueryobj.count==queryobj.count){
+			this.onGetData(queryobj,__presetdata);
+		}
+    },
+    noMoreData:function (queryobj) {
+        var type = queryobj.viewtype, param = queryobj.param, sorttype = queryobj.sorttype;
+        var d = DC.datacache[type] || {};
+        d = d[param] || {};
+        d = d[sorttype] || {};
+        return d['nomoreleft'];
+        if (d['data'] && d['data'].length > 0) {
+            d = d['data'];
+            if (d[d.length - 1]) {
+                d = d[d.length - 1];
+                for (var key in d) {
+                    if (d[key].left == 0) {
+                        return false;
+                    }
+                }
+                ;
+                return d[d.length - 1].left == 1;
+            }
+        }
+    },
+    queue:{},
+    extcache:{},
+    installedextcache:{},
+    datacache:{} //queryobj.serialize=>data
+};
+DC.getInstalledData();
+
+
+var apps_data = [];
+var viewmap = {};
+var ExtModel = Backbone.Model.extend({});
+var ExtList = Backbone.Collection.extend({
+    model:ExtModel
+});
+var LoadingTips = {
+    show:function () {
+        $(".loading-tip").show();
+    },
+    hide:function () {
+        $(".loading-tip").hide();
+    }
+};
+
+var ExtView = Backbone.View.extend({
+    tagName:"li",
+    template:_.template($("#template-view-ext").html()),
+    node:null,
+    animatetimeout:0,
+    events:{
+      "click":"onClick",
+      "click a.add-btn":"installExt",
+      "dbclick a.add-btn":"installExt",
+      "click a.installing-btn":"installingExt",
+      "dbclick a.installing-btn":"installingExt",
+      "click a.installed-btn":"installingExt",
+      "dbclick a.installed-btn":"installingExt",
+      "click a.update-btn":"installExt",
+      "dbclick a.update-btn":"installExt",
+      "click a.insed-btn":"onClick",
+      "mouseenter":"onmouseenter",
+      "mouseleave":"onmouseleave"
+    },
+    onmouseenter:function (e) {
+        var that = this;
+        this.animatetimeout = setTimeout(function () {
+            that.node.find('.ext-logo').animate({'margin-top':"-95px"},200);
+        }, 100);
+        //get_tips().appendTo($(this.el)).css({left:'14px',top:'50px'});
+    },
+    onmouseleave:function (e) {
+        clearTimeout(this.animatetimeout);
+        this.node.find('.ext-logo').animate({'margin-top':"0px"},200);
+        get_tips().remove();
+    },
+    installExt:function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if(chromeapi.is360chrome()){
+          if(!(DC.installedextcache[this.model.get("crx_id")]&&this.model.get("status")=="installed")){
+          	 var before_status = this.model.get("status");
+          	 chromeapi.updateStatus(this.model.get("crx_id"), "installing");
+          	 DC.extcache[this.model.get("crx_id")]['status'] = "installing";
+             chromeapi.installExt(DC.extcache[this.model.get("crx_id")]);
+             var ext = DC.extcache[this.model.get("crx_id")];
+			 setTimeout(function(){
+				//判断按钮状态
+				if(ext["status"]!="installed"){
+					var last_status = before_status ? before_status : "install";
+					chromeapi.updateStatus(ext["crx_id"], last_status);
+					DC.extcache[ext["crx_id"]]['status'] = last_status;
+				}							 
+			 },30000);
+          }
+        }else{
+          window.location=DOWNLOADEEURL;
+        }
+        return false;
+    },
+    installingExt: function(e) {
+    	e.preventDefault();
+        e.stopPropagation();
+        return false;
+    },
+    onClick:function (e) {
+        var extid = this.model.get("crx_id");
+        extrouter.navigate("detail/" + extid, {trigger:true});
+    },
+    initialize:function () {
+        this.model.bind("change", this.render, this);
+    },
+    render:function () {
+        $(this.el).html(this.template(this.model.toJSON()));
+        this.node = $(this.el).find(".ext-block");
+        return this;
+    }
+});
+var SearchExtView = Backbone.View.extend({
+    tagName:"li",
+    template:_.template($("#template-view-ext-search").html()),
+    events:{
+        "click":"onClick",
+        "click a.add-btn":"installExt",
+        "dbclick a.add-btn":"installExt",
+        "click a.update-btn":"installExt",
+        "dbclick a.update-btn":"installExt",
+        "mouseenter a.add-btn":"onmouseenter",
+        "mouseleave a.add-btn":"onmouseleave",
+        "click a.installing-btn":"installingExt",
+        "dbclick a.installing-btn":"installingExt",
+        "click a.installed-btn":"installingExt",
+        "dbclick a.installed-btn":"installingExt"
+    },
+    onmouseenter:function (e) {
+        var that = this;
+        this.animatetimeout = setTimeout(function () {
+            that.node.find('.ext-logo').animate({'margin-top':"-95px"},200);
+        }, 100);        
+        get_tips().appendTo($(this.el)).css({left:'0px',top:'30px'});
+    },
+    onmouseleave:function (e) {
+        clearTimeout(this.animatetimeout);
+        this.node.find('.ext-logo').animate({'margin-top':"0px"},200);
+        get_tips().remove();
+    },
+    installExt:function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if(chromeapi.is360chrome()){
+          if(!(DC.installedextcache[this.model.get("crx_id")]&&this.model.get("status")=="installed")){
+          	 var before_status = this.model.get("status");
+             chromeapi.updateStatus(this.model.get("crx_id"), "installing");
+             DC.extcache[this.model.get("crx_id")]['status'] = "installing";
+             chromeapi.installExt(DC.extcache[this.model.get("crx_id")]);
+             var ext = DC.extcache[this.model.get("crx_id")];
+			 setTimeout(function(){
+				//判断按钮状态
+				if(ext["status"]!="installed"){
+					var last_status = before_status ? before_status : "install";
+					chromeapi.updateStatus(ext["crx_id"], last_status);
+					DC.extcache[ext["crx_id"]]['status'] = last_status;
+				}							 
+			 },30000);
+          }        
+        }else{
+          window.location=DOWNLOADEEURL;
+        }
+        return false;
+    },
+    installingExt: function(e) {
+    	e.preventDefault();
+        e.stopPropagation();
+        return false;
+    },
+    onClick:function (e) {
+        var extid = this.model.get("crx_id");
+        extrouter.navigate("detail/" + extid, {trigger:true});
+    },
+    initialize:function () {
+    },
+    render:function () {
+        $(this.el).html(this.template(this.model.toJSON()));
+        return this;
+    }
+});
+var DetailExtView = Backbone.View.extend({
+    el:$("<div></div>"),
+    template:_.template($("#template-view-ext-detail").html()),
+    timehandler:0,
+    currentPicIndex:0,
+    totalPic:1,
+    events:{
+        "click a.download-btn":"preventDefault",
+        "click a.add-btn":"installExt",
+        "dbclick a.add-btn":"installExt",
+        'click a.weiboshare':'weiboshare',
+        "click a.update-btn":"installExt",
+        "dbclick a.update-btn":"installExt",
+        "mouseenter a.add-btn":"onmouseenter",
+        "mouseleave a.add-btn":"onmouseleave",
+        "click a.installing-btn":"installingExt",
+        "dbclick a.installing-btn":"installingExt",
+        "click a.installed-btn":"installingExt",
+        "dbclick a.installed-btn":"installingExt"
+    },
+    onmouseenter:function (e) {                
+        get_tips().insertAfter($('.dialog-head',this.el)).css({left:'560px',top:'60px'});
+        $('.install-status',this.el).css('z-index','999');
+    },
+    onmouseleave:function (e) { 
+        get_tips().remove();
+    },
+    preventDefault:function(e){
+      e.preventDefault();
+    },
+    installExt:function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if(chromeapi.is360chrome()){
+          if(!(DC.installedextcache[this.model.get("crx_id")]&&this.model.get("status")=="installed")){
+          	 var before_status = this.model.get("status");
+             chromeapi.updateStatus(this.model.get("crx_id"), "installing");
+             DC.extcache[this.model.get("crx_id")]['status'] = "installing";
+             chromeapi.installExt(DC.extcache[this.model.get("crx_id")]);
+             var ext = DC.extcache[this.model.get("crx_id")];
+			 setTimeout(function(){
+				//判断按钮状态
+				if(ext["status"]!="installed"){
+					var last_status = before_status ? before_status : "install";
+					chromeapi.updateStatus(ext["crx_id"], last_status);
+					DC.extcache[ext["crx_id"]]['status'] = last_status;
+				}							 
+			 },30000);
+          }
+        }else{
+          window.location=DOWNLOADEEURL;
+        }
+        return false;
+    },
+    installingExt: function(e) {
+    	e.preventDefault();
+        e.stopPropagation();
+        return false;
+    },
+    weiboshare:function(e){
+      $('#jqmContainer').show().css('z-index',99999);
+      function loadContent (id) {
+        $.post('/webstore/ajax_share_content/'+id, {}, function(msg){
+            if (msg&&(typeof(msg)).toLowerCase()=="object"&&msg.status == 'success') {
+              $('#content').html(msg.html);
+              $('#username').html(msg.nick);
+            } else {
+              $('#content').html('无法获取网络内容，请刷新页面后重试。');
+              }
+          }, 'json');
+      };
+      if(__islogined!='0'){
+        loadContent(this.model.get('crx_id'));
+        return false;
+      }else{
+        $(e.target).attr('href',__aurl.replace(encodeURI(encodeURIComponent('/webstore/home')),encodeURI(encodeURIComponent('/webstore/detail/'+this.model.get('crx_id')))));
+      }
+    },
+    initialize:function () {},
+    startpic:function(){
+        
+      
+    },
+    render:function () {
+    	var model_json = this.model.toJSON();
+        $(this.el).html(this.template(model_json));	
+        this.delegateEvents(this.events);
+        return this;
+    },
+    updatesort:function (newsorttype) {	}
+});
+
+var SearchView = Backbone.View.extend({
+    el:$(".search-app-list"),
+    viewtype:"search",
+    param:"",
+    lasttoken:"",
+    total:"",
+    events:{},
+	extlist:[],
+    initialize:function () {
+    },
+    update:function () {
+        var queryobj = new QueryObj(PATH.type, PATH.param, 20, "download"||PATH.sorttype || "hot", this.lasttoken);
+        DC.getData(queryobj, this.updatedata);
+    },
+    more:function (scrolltop, height) {
+        if (this.el.height() - scrolltop - height < 400) {
+            this.update();
+        }
+    },
+    clear:function () {
+        this.lasttoken = "";
+        this.total = 0;
+        this.param = "";
+        this.el.empty();
+		this.extlist.length=0;
+    },
+    updatesort:function (newsorttype) {
+
+    },
+    updatedata:function (data, queryobj) {
+		var searchview= SearchController.getInstance();
+		if(queryobj.token==0){
+			SearchController.getInstance().clear();
+		}
+        var extslist = data['list']||[];
+        for (var i = 0, len = extslist.length; i < len; i++) {
+            var model = new ExtModel();
+            model.set(DC.extcache[extslist[i]["crx_id"]]);
+            var extview = new ExtView({model:model});
+			searchview.extlist.push(model);
+            SearchController.getInstance().el.append(extview.render().el);
+        }		
+        SearchController.getInstance().viewtype = queryobj.viewtype;
+        SearchController.getInstance().param = queryobj.param;
+		if (data.token) {
+			SearchController.getInstance().lasttoken = data.token;
+			SearchController.getInstance().total += data.total;
+		}
+        if (DC.noMoreData(queryobj)) {
+            LoadingTips.hide();
+			if(SearchController.getInstance().total==0){
+				var el = SearchController.getInstance().el;
+				if (el.find('.search-notfound').length == 0) {
+					el.append($("<div class='search-notfound' style='padding:20px;color:#888;font-size:14px;'>未找到相符的搜索结果</div>"))
+				}
+			}
+        } else {
+            LoadingTips.show();
+        }
+    }
+});
+var CategoryView = Backbone.View.extend({
+    el:$(".app-list"),
+    template:_.template($("#template-view-category").html()),
+    viewtype:"category",
+    param:"all",
+    lasttoken:"0",
+    total:0,
+    extlist:[],
+    events:{
+    },
+    initialize:function () {
+		this.el_offsetTop = this.el.offset().top
+    },
+    update:function () {
+        var queryobj = new QueryObj(PATH.type, PATH.param, 20, PATH.sorttype, CategoryController.getInstance().lasttoken);
+        DC.getData(queryobj, this.updatedata);
+    },
+    more:function (scrolltop, height) {
+        if (this.el.height() + this.el_offsetTop - scrolltop - height < 200) {
+            this.update();
+        }
+    },
+    clear:function () {
+        this.total = 0;
+        this.extlist.length = 0;
+        this.lasttoken = 0;
+        this.el.empty();
+    },
+    updatesort:function (newsorttype) {
+        this.clear();
+        this.update();
+    },
+    updatedata:function (data, queryobj) {
+        if (queryobj.viewtype == "category") {
+			if(queryobj.param == CategoryController.getInstance().param){
+				
+			}else{
+				CategoryController.getInstance().clear();
+			}
+        } else {
+            return;
+        }
+		var categoryview=CategoryController.getInstance();
+		if(queryobj.token==0){
+			categoryview.clear();
+		}
+        var jsdata = data;//JSON.parse(data);
+        var extslist = jsdata['list']||[];;
+        for (var i = 0, len = extslist.length; i < len; i++) {
+            var model = new ExtModel();
+            model.set(DC.extcache[extslist[i]["crx_id"]]);
+            categoryview.extlist.push(model);
+            var extview = new ExtView({model:model});
+            categoryview.el.append(extview.render().el);
+        }
+        if (DC.noMoreData(queryobj)) {
+            LoadingTips.hide();
+        } else {
+            LoadingTips.show();
+        }
+        CategoryController.getInstance().viewtype = queryobj.viewtype;
+        CategoryController.getInstance().param = queryobj.param;
+		if (jsdata.token) {
+			CategoryController.getInstance().lasttoken = jsdata.token;
+			CategoryController.getInstance().total += jsdata.total;
+		}
+    }
+});
+
+
+var DetailView = Backbone.View.extend({
+    el:$($("#template-view-detail").html()),
+    events:{
+        "click .btn-list a":"showdetail",
+		'click .next':'onnext',
+		'click .prev':'onprev'
+    },  
+	targetcrxid:'',
+    initialize:function () {    },
+    render:function () {
+		console.log('detail.view..render');
+       // $(this.el).html(this.template(this.model.toJSON()));		
+        this.delegateEvents(this.events);		
+        return this;
+    },
+    startPicShow:function () {
+        var detailview = DetailController.getInstance();
+        clearTimeout(detailview.timehandler);
+        detailview.timehandler = setTimeout(function () {
+            detailview.showPicIndex(++detailview.currentPicIndex);
+            DetailController.getInstance().startPicShow();
+        }, 5000);
+    },
+    
+    clear:function () { },
+	onnext:function(e){
+		e.stopPropagation();
+		e.preventDefault();
+		try{
+		var ds=controllers[PATH._type2].getInstance().extlist;
+		var index=parseInt(this.el.find('ul li:last img').attr('index'));
+		console.log(index);
+		if(ds.length>index+1){
+			this.updateindex(index+1,true,'next');
+		}
+		}catch(e){}
+	},
+	onprev:function(e){
+		e.stopPropagation();
+		e.preventDefault();
+		try{
+		var ds=controllers[PATH._type2].getInstance().extlist;
+		var index=parseInt(this.el.find('ul li img:first').attr('index'));
+		console.log(index);
+		if(index-1>0){
+			this.updateindex(index-1,true,'prev');
+		}
+		}catch(e){}
+	},
+	showdetail:function(e){
+		e.stopPropagation();
+		var crx_id=$(e.target).parents('li:first').attr('crx_id');
+		console.log(crx_id,e,e.target);
+		extrouter.navigate("detail/" + crx_id, {trigger:true});
+		return false;
+	},
+    update:function (crx_id) {
+        if(PATH._type2){
+			var ds=controllers[PATH._type2].getInstance().extlist;
+			var index=0;
+			for(var i=0;i<ds.length;i++){
+				if(ds[i].get('crx_id')==crx_id){
+					index=i;
+					break;
+				}
+			}
+			this.targetcrxid=crx_id;
+			this.updateindex(index);
+		}else{
+			
+		}
+    },
+	updateindex:function(idx,nocurrent,nextorprev){
+		var ds=controllers[PATH._type2].getInstance().extlist;
+		var $extlist=this.el.find('.btn-list ul');
+		var modindex=idx%11;
+		var listindex=Math.floor(idx/11);
+		
+		var htmls=""
+		for(var i=11*listindex,len=Math.min(11*(listindex+1),ds.length);i<len;i++){
+			htmls+='<li '+(/*(i==idx&&!nocurrent)||*/(ds[i].get('crx_id')==this.targetcrxid)?'class="cur"':'')+' crx_id='+ds[i].get('crx_id')+'><a href="/webstore/detail/'+ds[i].get('crx_id')+'"><span></span>'+/*(i+1)+*/'<img index="'+i +'" class="slide-control-img" src="'+ ds[i].get('logo') +'" alt=""/></a></li>';
+		}
+		if(nextorprev){
+			var $ul=$('<ul></ul>');
+			$ul.css({position:'absolute'}).html(htmls);
+			if(nextorprev=="next"){
+				$ul.insertAfter($extlist).css({left:'760px'}).animate({left:'-=760px'},400);
+				$extlist.css({position:'absolute'}).animate({left:'-=760px'},400,function(){
+					$extlist.remove();
+				});
+			}else{
+				$ul.insertBefore($extlist).css({left:'-760px'}).animate({left:'+=760px'},400);
+				$extlist.css({position:'absolute'}).animate({left:'+=760px'},400,function(){
+					$extlist.remove();
+				});
+			}
+		}else{
+			$extlist.html(htmls);
+		}
+	},
+    show:function (crx_id) {
+		console.log('detailview.show..');
+        DC.getExt(crx_id, function () {
+			document.body.style.overflow = 'hidden';
+            if(document.documentElement.clientHeight < document.documentElement.offsetHeight){
+                document.body.style.marginRight = "17px";
+                $('.head-warp').css('right', '17px').css('width', 'initial');
+            }
+            $(".dialog-bg").show();
+			var model = new ExtModel();
+            model.set(DC.extcache[crx_id]);
+			var detailExtView=new DetailExtView({model:model});					
+			DetailController.getInstance().el.find('.detail-ext-wrapper').empty().append(detailExtView.render().el);
+			if(DetailController.getInstance().el.parents('body').length==0){
+				DetailController.getInstance().el.appendTo('body');
+			}
+			setTimeout(function(){slides(detailExtView.el.find(".pagination li"),detailExtView.el.find(".slides"));},10);
+			detailExtView.el.find('');
+			
+			DetailController.getInstance().update(crx_id);
+			if(PATH._type!='detail'){
+				dialog('.dialog01');
+			}
+        });
+    },
+    hide:function () {
+        $("body").removeAttr('style');
+        $('.head-warp').css('right', '0px')
+        $(".dialog-bg").hide();
+		this.el.hide();		
+		$('#jqmContainer').hide();
+        clearInterval(this.timehandler);      
+    },
+    updatesort:function (newsorttype) {   }
+});
+
+var PATH = {
+    _type:"", _param:"", type:"", param:"", sorttype:"download", _sorttype:"",_type2:'',_param2:'',
+    update:function (type, para) {
+        this._type = this.type;
+        this._param = this.param;
+		if(this._type&&this._type!='detail'&&type=="detail"){
+			this._type2=this._type;
+			this._param2=this._param;
+		}
+        if (this.type == type) {
+            switch (this.type) {
+                case "search":
+                    this.resetnav('all')
+                case "category":
+                        controllers[this.type].getInstance().clear();
+                    if (para != this._param) {
+                    }
+                    break;
+                case "detail":
+                    break;
+            }
+            if (this.param == this._param) {
+
+            }
+        } else {
+            controllers[type].getInstance().clear();
+        }
+        this.type = type;
+        this.param = para;
+        switch (type) {
+            case "search":
+                this.resetnav('search');
+                $('#slides').hide();
+                $("#header-search").find("span").text('"' + (this.param) + '"').end().show();
+                $("#header-category").hide();
+                if (this.param != this._param) {
+                    SearchController.getInstance().clear();
+                }
+                SearchController.getInstance().el.appendTo("#app-container");
+                CategoryController.getInstance().el.remove();
+                CategoryController.getInstance().el.addClass("searchview");
+                DetailController.getInstance().hide();
+                SearchController.getInstance().update();
+                $("#category-type li").removeClass("cur").parent().find("a[type=" + CATEIDMAP['全部'] + "]").parent().addClass("cur");
+                fixNav();
+                SideTopView.update('全部');
+                break;
+            case "detail":
+                DetailController.getInstance().show(para);
+                break;
+            case "category":
+                switch (PATH.param) {
+                  case '全部':
+                    $('#slides').show();
+                    break;
+                  default:
+                    $('#slides').hide();
+                    break;
+                }
+                $("#header-search").hide();
+                $("#header-category").show();
+                SearchController.getInstance().el.remove();
+                CategoryController.getInstance().el.removeClass("searchview").appendTo("#app-container");
+                CategoryController.getInstance().param = this.param;
+                CategoryController.getInstance().update();
+                DetailController.getInstance().hide();
+                SideTopView.update(PATH.param);
+                break;
+        }
+    },
+    updatesort:function (sorttype) {
+        sorttype = ({"下载量":"download", "推荐度":"hot", "更新时间":"lastupdate"})[sorttype];
+        if (this.sorttype == sorttype) {
+            return;
+        } else {
+            this._sorttype = this.sorttype;
+            this.sorttype = sorttype;
+            controllers[this.type].getInstance().updatesort(sorttype);
+        }
+    },
+    more:function (scrolltop, height) {
+        switch (PATH.type) {
+            case "search":
+                SearchController.getInstance().more(scrolltop, height);
+                break;
+            case "category":
+                CategoryController.getInstance().more(scrolltop, height)
+                break;
+        }
+    },
+    resetnav:function (type) {
+        var navitem=$("#category-type td a,#category-type td div").removeClass("cur").parents('tr:first').find("a[type=" + (type || _ExtCate[0]['id']) + "],div[type="+(type || _ExtCate[0]['id'])+"]").addClass("cur");
+		if(type=="search"){
+			navitem.addClass('hover');
+			$('.sort-list').hide();
+			$('.search-tips').show().find('span').html(htmlspecialchars(this.param));
+		}else{
+			$('.sort-list').show();
+			$('.search-tips').hide();
+			$("#category-type td div").has('.search-box').removeClass('hover');
+		}
+		
+    }
+};
+
+var HotSlideView = {
+    update: function(cat){
+        var _this = this;
+        var catid = _this.getCatId(cat);
+        var data = window['__configs']['index_rotate'][catid] || [];
+        if (chromeapi.is360chrome()) {
+            chrome.management.getAll(function(items){
+                $.each(data, function(i, item){
+                    var installed = 0;
+                    $.each(items, function(j, ext){
+                        if (ext.id == item.crx_id) {
+                            installed = 1;
+                            return false;
+                        }
+                    });
+                    item['slide_sort'] = i;
+                    item['installed'] = installed;
+                });
+                data.sort(function(x, y){
+                    if (x.installed != y.installed) {
+                        return x.installed - y.installed;
+                    } else {
+                        return x.slide_sort - y.slide_sort;
+                    }
+                });
+                _this.render(data);
+            });
+        } else {
+            _this.render(data);
+        }
+    },
+    render: function(data){
+      console.log('--------------------HotSlideView-----------------', data);
+      if (data.length > 5) {
+          data = data.slice(0, 5);
+      }
+      $.each(data, function(i, item){
+	    	var condition = DC.extcache[item['crx_id']];
+	    	if(!condition) {
+	    		console.log('test')
+	    		DC.extcache[item['crx_id']] = item;
+				DC.datafix(item);
+				if (DC.installedextcache[item['crx_id']]) {
+					item["status"] = "installed";
+					if (depends.version.lt(DC.installedextcache[item['crx_id']]['version'], item['version'])) {
+						item["status"] = "update";
+					}
+				} else {
+					item["status"] = "install";
+				}
+	    	} else {
+	    		item["status"] = DC.extcache[item['crx_id']]['status'];
+	    	}
+	  });
+      var box = $('#slideview').empty();
+      $.each(data, function(i, item){
+          box.append(_.template($('#template-slideview-ext').html())(item));
+      });
+      this.bind();
+    },
+    bind: function(){
+      $('#slides').slides({
+        container: '.slides-box ul'
+      });
+      $('#slideview li').unbind().click(function(){
+			extrouter.navigate("detail/" + $(this).attr("extid"), {trigger:true});
+			return false;
+	  });	
+	  var install_func = function(that, e) {
+			e.preventDefault();
+			e.stopPropagation();
+			var extid = that.parent().attr('extid');
+			var ext = DC.extcache[extid];
+			if(chromeapi.is360chrome()){
+	          if(!(DC.installedextcache[extid]&&ext["status"]=="installed")){
+	          	 that.unbind().bind('click dblclick', function(e){
+	          	 	 e.preventDefault();
+			         e.stopPropagation();
+			         return false;
+	          	 });
+	          	 var before_status = ext["status"];
+	          	 chromeapi.updateStatus(extid, "installing");
+	          	 ext["status"] = "installing";
+	             chromeapi.installExt(ext);
+				 setTimeout(function(){
+					//判断按钮状态
+					if(ext["status"]!="installed"){
+						var last_status = before_status ? before_status : "install";
+						chromeapi.updateStatus(extid, last_status);
+						ext["status"] = last_status;
+						$('#slideview li .slide-install-add-btn,#slideview li .slide-install-update-btn').unbind().bind('click dblclick',function(e){
+							install_func($(this), e);
+						});
+					}							 
+				 },30000);
+	          }
+	        }else{
+	          window.location=DOWNLOADEEURL;
+	        }
+	        return false;
+	  }
+	  $('#slideview li .slide-install-add-btn,#slideview li .slide-install-update-btn').unbind().bind('click dblclick',function(e){
+	  	    if($(this).hasClass('slide-install-installed-btn') || $(this).hasClass('slide-install-installing-btn')) {
+	  	    	e.preventDefault();
+			    e.stopPropagation();
+				return false;
+	  	    }
+			install_func($(this), e);
+	  });
+	  $('#slideview li .slide-install-installing-btn,#slideview li .slide-install-installed-btn').unbind().bind('click dblclick',function(e){
+  	    	e.preventDefault();
+		    e.stopPropagation();
+			return false;
+	  });
+    },
+    getCatId: function(name) {
+        var id = '';
+        $.each(_ExtCate, function(i, item){
+            if (item.cate == name) {
+                id = item.id;
+                return false;
+            }
+        });
+        return id;
+    }
+};
+
+HotSlideView.update('全部');
+
+var SideTopView = {
+	cache: {},
+	update: function(cat) {
+		$.each(SORTMAP, function(sort){
+			if (!SideTopView.cache[cat]) {
+				SideTopView.cache[cat] = {};
+			}
+			var data = SideTopView.cache[cat][sort];
+			if (data) {
+				SideTopView.render(sort, data);
+			} else {
+				$.getJSON('/provider/extlist/', {category:cat, count:10, sortType:sort, token:0}, function(ret){
+					if (ret && ret.list) {
+						SideTopView.cache[cat][sort] = ret.list;
+						SideTopView.render(sort, ret.list);
+					}
+				});
+			}
+		});
+	},
+	render: function(sort, data) {
+		$.each(data, function(i, item){
+        	if(!DC.extcache[item['crx_id']]) {
+        		DC.extcache[item['crx_id']] = item;
+				DC.datafix(item);
+				if (DC.installedextcache[item['crx_id']]) {
+					item["status"] = "installed";
+					if (depends.version.lt(DC.installedextcache[item['crx_id']]['version'], item['version'])) {
+						item["status"] = "update";
+					}
+				} else {
+					item["status"] = "install";
+				}
+        	} else {
+        		item["status"] = DC.extcache[item['crx_id']]['status'];
+        	}
+        });
+		var box = $('#topview-' + sort).empty();
+		$.each(data, function(i, item){
+             if (sort == 'download') {
+                 item['download'] = item['wdownload'];
+             }
+			item['index'] = i + 1;
+			box.append(_.template($('#template-topview-ext').html())(item));
+		});
+		this.bind();
+	},
+	bind: function(){
+		$('.list-box li').unbind()/*.mouseenter(function(){
+			$(this).children('dl').show().end().children('div').hide();
+			$(this).siblings().children('dl').hide().end().children('div').show();
+		})*/.click(function(){
+			extrouter.navigate("detail/" + $(this).attr("extid"), {trigger:true});
+			return false;
+		});	
+		var install_func = function(that, e) {
+			e.preventDefault();
+			e.stopPropagation();
+			var extid = that.attr('extid');
+			var ext = DC.extcache[extid];
+			if(chromeapi.is360chrome()){
+	          if(!(DC.installedextcache[extid]&&ext["status"]=="installed")){
+	          	 that.unbind().bind('click dblclick', function(e){
+	          	 	 e.preventDefault();
+			         e.stopPropagation();
+			         return false;
+	          	 });
+	          	 var before_status = ext["status"];
+	          	 chromeapi.updateStatus(extid, "installing");
+	          	 ext["status"] = "installing";
+	             chromeapi.installExt(ext);
+				 setTimeout(function(){
+					//判断按钮状态
+					if(ext["status"]!="installed"){
+						var last_status = before_status ? before_status : "install";
+						chromeapi.updateStatus(extid, last_status);
+						ext["status"] = last_status;
+						$('.list-box li .add-btn,.list-box li .update-btn').unbind().bind('click dblclick', function(e){
+							install_func($(this), e);
+						});
+					}							 
+				 },30000);
+	          }
+	        }else{
+	          window.location=DOWNLOADEEURL;
+	        }
+	        return false;
+		}
+		$('.list-box li .add-btn,.list-box li .update-btn').unbind().bind('click dblclick', function(e){
+			if($(this).hasClass('installed-btn') || $(this).hasClass('installing-btn')) {
+				e.preventDefault();
+			    e.stopPropagation();
+				return false;
+			}
+			install_func($(this), e);
+		});
+		$('.list-box li .installed-btn,.list-box li .installing-btn').unbind().bind('click dblclick', function(e){
+				e.preventDefault();
+			    e.stopPropagation();
+				return false;
+		});
+	}
+};
+
+var CategoryController = {
+    categoryview:null,
+    initialize:function () {
+        this.categoryview = new CategoryView();
+		//this.categoryview.update();
+    },
+    getInstance:function (param) {
+        if (!this.categoryview) {
+            this.initialize(param);
+        }
+        return this.categoryview;
+    },
+    show:function () {
+        this.getInstance().el.appendTo(".app-list-wrapper");
+    },
+    hide:function () {
+        this.getInstance().el.remove();
+    }
+};
+var SearchController = {
+    searchview:null,
+    initialize:function () {
+        this.searchview = new SearchView();
+    },
+    getInstance:function (param) {
+        if (!this.searchview) {
+            this.initialize();
+        }
+        return this.searchview;
+    },
+    show:function () {
+        this.getInstance().el.appendTo(".app-list-wrapper");
+    },
+    hide:function () {
+        this.getInstance().el.remove();
+    }
+};
+var DetailController = {
+    detailview:null,
+    initialize:function () {
+        this.detailview = new DetailView({model:new ExtModel()});
+    },
+    getInstance:function () {
+        if (!this.detailview) {
+            this.detailview = new DetailView({model:new ExtModel()});
+        }
+        return this.detailview;
+    },
+    show:function (crx_id) {
+        DC.getExt(crx_id, function () {
+            $(".dialog-bg").show();
+            DetailController.getInstance().model.set(DC.extcache[crx_id]);
+            $("body").append(DetailController.getInstance().render().el);
+        });
+    },
+    hide:function () {
+        $(".dialog-bg").hide();
+		$('#jqmContainer').hide();
+        DetailController.getInstance().el.remove();
+    }
+};
+var controllers = {
+    "search":SearchController,
+    "category":CategoryController,
+    "detail":DetailController
+}
+
+$(function () {
+	chromeapi.updateExtCount();
+
+    var tmp = _.template($("#template-category-type").html());
+	//添加分类
+	var ori=$("#category-type").children().detach();
+    _.each(_ExtCate, function (cateobj, i) {
+		var icon = i + 1;
+		if (icon < 10) icon = '0' + icon.toString();
+        $("#category-type").append(tmp({catename:CATENAMEMAP[cateobj['id']], catetype:cateobj['id'], icon:icon}));
+    });
+	$("#category-type").prepend(ori);
+
+    var extrouter;
+    //fix url#hash.within ie||chrome.
+    var url = document.location.href;
+    url = url.split("#");
+    var hash = url[1] || "";
+    url = url[0];
+	var webroot="";
+    var paths;
+    if ($.browser.msie||typeof history.pushState=="undefined") {
+        url = url.split(URLCONF['webroot']);
+		webroot=url[0];
+		url=url[1] || '';
+        paths = url.split("/");
+        if (paths.length == 2) {
+            document.location.href = webroot+URLCONF['webroot']+"home#" + url;
+        } else {
+        }
+        extrouter = new ExtRouter();
+        Backbone.history.start({ root:URLCONF['webroot']});
+    } else {
+		webroot=url.split(URLCONF['webroot'])[0];
+        if (hash) {			
+			document.location.href = webroot.replace(/\/$/, '')+URLCONF['webroot'] + hash;
+        } else {
+            extrouter = new ExtRouter();
+			Backbone.history.start({pushState:true, root:URLCONF['webroot']});
+        }
+    }
+    window.extrouter = extrouter;
+	$('.navigate').live('click', function(){
+		extrouter.navigate($(this).attr('path'), {trigger:true});
+	});
+    $("#category-type .cat").click(function (e) {
+        var type = $(this).attr('type');
+		if(type){
+			extrouter.navigate("category/" + CATETYPEMAP[type] + '/' + SORTMAP[PATH.sorttype], {trigger:true});
+			PATH.resetnav(type);
+			document.title = "扩展中心 - 360极速浏览器 - " + CATETYPEMAP[type];
+			return false;
+		}
+    });
+	$('.sort').click(function(){
+		PATH.sorttype = $(this).attr('sort');
+		extrouter.navigate("category/" + PATH.param + '/' + SORTMAP[PATH.sorttype], {trigger:true});
+		window.scroll(0, 0);
+		return false;
+	});
+    $("#search-form").bind("submit", function (e) {
+        var key = $(this).find("input[name=q]").val();
+		key = key.replace(/^\s+|\s+$/g, '');
+		if(key!=""){
+			extrouter.navigate("search/" + (key), {trigger:true});
+		}else{
+			alert('请输入搜索条件');
+			$(this).find("input[name=q]").focus();
+		}
+        return false;
+    });
+	$('.sch-btn').click(function(e){
+		$('#search-form').submit();
+	
+	});
+	$(".sort-list a").click(function () {
+        PATH.updatesort($(this).text());
+		$(this).addClass('cur').siblings('a').removeClass('cur');
+		return false;
+    });
+	
+	$(document).bind("click",function(e){
+		$(".select-list").hide();
+	}).bind("mousewheel",function(e){
+		$(".select-list").hide();
+		if($(e.target).is("body")){
+			var $target=$(".extend-list");
+			if (e.originalEvent.wheelDelta > 0) {
+				$target.scrollTop($target.scrollTop()-100);
+			} else if (e.originalEvent.wheelDelta < 0) {
+				$target.scrollTop($target.scrollTop()+100);
+			}
+			return;
+		}
+	}).bind("keydown",function(e){
+		switch (e.keyCode) {
+        case 27:
+			$("#closed-btn").trigger("click");
+            break;
+        case 39:
+
+            break;
+    }});
+	
+    $(".dialog-bg").bind("click", function (e) {
+        $("#closed-btn").trigger("click");
+    });
+
+    $("#closed-btn").live("click", function (e) {
+        DetailController.getInstance().hide();
+		var _type=PATH._type2||PATH._type,_param=PATH._param2||PATH._param;
+		var type=PATH.type,param=PATH.param;
+        if (_type == "search") {
+            extrouter.navigate("" + (_type || "search") + "/" + (_param || "all"));
+			PATH._type=type;PATH._param=param;
+			PATH.type=_type;PATH.param=_param;
+        } else if (_type == "category") {
+            extrouter.navigate("" + (_type || "category") + "/" + (_param || "all") + '/' + SORTMAP[PATH.sorttype]);
+			PATH._type=type;PATH._param=param;
+			PATH.type=_type;PATH.param=_param;
+        } else {
+            extrouter.navigate("" + ("category") + "/" + ("all"), {trigger:true});
+        }
+        return false;
+    });
+    $(window).bind("scroll", function (e) {
+        PATH.more($(this).scrollTop(), $(this).height());
+    });
+	
+    var clientheight = document.documentElement.clientHeight;
+    var $body = $(document.body);
+    var $window = $(window);
+	$('.footer').hide();
+    function onwindowresize(e) {
+        var w = document.documentElement.clientWidth, h = document.documentElement.clientHeight;
+        h = h < 550 ? 550 : h;
+		if($('.sort-list').css('display')=="none"){
+			h=h-182-100;
+		}else{
+			h=h-223-100;
+		}			
+		
+        clientheight = h;
+        $(".extend-list").css("height", h);        
+    }
+	if($.browser.mise&&$.browser.version<8){
+		$("body").css("overflow","auto");
+	}else{
+	    $window.resize(onwindowresize);
+		onwindowresize();
+	}
+    var Dialoghandler = {
+        cates:function (e) {
+			var $this = $(e);
+			var $thisa = $this;//.find("a");
+			var typename = $thisa.text();
+			if(typename){
+				extrouter.navigate("category/" + typename + '/' + SORTMAP[PATH.sorttype], {trigger:true});
+				PATH.resetnav(CATEIDMAP[typename]);
+				document.title = "扩展中心 - 360极速浏览器 - " + typename;
+				window.scrollTo(0,0);
+				return false;
+			}           
+        }
+    };
+    window.Dialoghandler = Dialoghandler;
+
+// 让不支持placeholder的浏览器实现此属性
+	function supports_input_placeholder(){
+		var i = document.createElement("input");
+		return "placeholder" in i;
+	}
+
+	var input_placeholder = $("input[placeholder],textarea[placeholder]");	
+	if (input_placeholder.length !== 0 && !supports_input_placeholder()) {	
+		var color_place = "#A9A9A9";			
+		$.each(input_placeholder, function(i){
+			var isUserEnter = 0; // 是否为用户输入内容,placeholder允许用户的输入和默认内容一样
+			var ph = $(this).attr("placeholder");
+			var curColor = $(this).css("color");			
+			$(this).val(ph).css("color", color_place);		
+			$(this).focus(function(){
+				if ($(this).val() == ph && !isUserEnter) $(this).val("").css("color", curColor);
+			}).blur(function(){
+				if ($(this).val() == "") {
+					$(this).val(ph).css("color", color_place);
+					isUserEnter = 0;
+				}
+			}).keyup(function(){
+				if ($(this).val() !== ph) isUserEnter = 1;
+			});			
+		});
+	}
+});
+
+$('.change_user').click(function(e){
+	$('.change_user').attr('href','/webstore/change_user?backurl=/webstore/detail/'+PATH.param);
+});
+
+var jqm={
+	jqmHide:function(){$('#jqmContainer').hide()},
+}
+var jqmRes={
+	jqmShow:function(){
+		$('#jqmResult').show();
+	},
+	jqmHide:function(){
+		$('#jqmResult').hide();
+	}
+}
+
+
+function FriendsScroll (container, mover) {
+    this.container = container;
+    this.mover = mover;
+    this.cursor = 0;
+    this.unum = $('li', this.container).length;
+
+    this.proxy = function (cb) {
+        var that = this;
+        return function (){
+            return cb.apply (that, arguments);
+        };
+    };
+    this.init = function (leftTriggle, rightTriggle, uwidth) {
+        this.rTriggle = rightTriggle;
+        this.lTriggle = leftTriggle;
+        this.winWidth = 7 * uwidth;
+        
+        this.mover.css('width', Math.ceil(this.unum / 2) * uwidth);
+        this.leftWidth = 0;
+        this.rightWidth = Math.ceil(this.unum / 2) * uwidth - this.winWidth;
+
+        this.rTriggle.bind('click', this.proxy(this.moveRight));
+        this.lTriggle.bind('click', this.proxy(this.moveLeft));
+    };
+    this.moveLeft = function () {
+        if (this.leftWidth <= 0) return;
+        else {            
+            if (this.leftWidth >= this.winWidth) {
+                this.cursor -= this.winWidth;
+                this.leftWidth -= this.winWidth;
+                this.rightWidth += this.winWidth;
+            } else {
+                this.cursor -= this.leftWidth;
+                this.rightWidth += this.leftWidth;
+                this.leftWidth = 0;
+            }
+            this.mover.animate({left:'-'+this.cursor+'px'}, 1000);
+        }
+    };
+    this.moveRight = function () {
+        if (this.rightWidth <= 0) return ;
+        else {
+            if (this.rightWidth >= this.winWidth) {
+                this.cursor += this.winWidth;
+                this.rightWidth -= this.winWidth;
+                this.leftWidth += this.winWidth;
+            } else {
+                this.cursor += this.rightWidth;
+                this.leftWidth += this.rightWidth;
+                this.rightWidth = 0;
+            }
+            this.mover.animate({left: '-'+this.cursor+'px'}, 1000);
+
+        }
+    }
+}
+
+$(function(){
+window.get_tips=(function(){
+    var tips=$();
+    if(!chromeapi.is360chrome()){
+      tips=$($('#notsurspport').val());
+    }
+    return function(){
+      return tips;
+    }
+})();
+try{
+var img=new Image();
+img.src="http://p4.qhimg.com/d/360browser/20121123/notsupoort.gif";
+setTimeout(function(){img=null;},10000);
+}catch(e){}
+});

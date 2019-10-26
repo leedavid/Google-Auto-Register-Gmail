@@ -1,0 +1,360 @@
+{
+   "net": {
+      "http_server_properties": {
+         "servers": [ {
+            "https://i.ytimg.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://yt3.ggpht.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://s.ytimg.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://adservice.google.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.google.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.goo.ne.jp": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.goo": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.samclarke.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.gome.com.cn": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.youtube.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://ssl.google-analytics.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.canhui.bid:2333": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.readless.bid": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://o4175vz27.qnssl.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://clients2.google.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.tradetop.win": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://r2r4hfi61hn-colab.googleusercontent.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.webhoo.win": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://static.coolee.bid:8080": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://s4.ssl.qhimg.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://browser.360.cn": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://detail.1688.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://imgx.mediav.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.nanoo.bid": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.geili.science:9090": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.buyao.bid:5050": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.kingta.club:5555": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.xinlin.bid:4040": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.titiai.win:7000": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://s13.cnzz.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://cnzz.mmstat.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://s0.ssl.qhimg.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://cdn.weather.hao.360.cn": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://s1.ssl.qhres.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://s.ssl.qhres.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://hao.ssl.dhrest.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://p2.ssl.qhimg.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://irs01.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://p0.ssl.qhimgs4.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://p.ssl.qhimg.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://s0.ssl.qhres.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://cm.g.doubleclick.net": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://s3m.mediav.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://p1.ssl.qhimg.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://p0.ssl.qhimg.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://expense.console.aliyun.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://xijunlee.github.io": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://zhuanlan.zhihu.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.erbuxiu.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://m3t5dmue2x-colab.googleusercontent.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://wzfou.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://asm.ca.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.fakenamegenerator.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.cloudflare.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://accounts.google.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://jinkey.ai": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://developer.download.nvidia.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.pcsuggest.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://fonts.googleapis.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.python36.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://docs.nvidia.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.colabug.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.incapsula.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.jianshu.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://askubuntu.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://drive.google.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://segmentfault.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://ssl.gstatic.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.gstatic.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.googleapis.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://apis.google.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://content.googleapis.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.alexedwards.net": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.google-analytics.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://fonts.gstatic.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.cnblogs.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://colobu.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.hostloc.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://duilian.msra.cn": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://mischasan.wordpress.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://s1.wp.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.cnbanwagong.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://dcdn.console.aliyun.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.aliyun.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://www.chess.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://colab.research.google.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://programtalk.com": {
+               "supports_spdy": true
+            }
+         }, {
+            "https://report-uri.cloudflare.com": {
+               "supports_spdy": true
+            }
+         } ],
+         "version": 5
+      }
+   }
+}
